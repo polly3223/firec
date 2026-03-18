@@ -19,6 +19,8 @@ Requires [Homebrew](https://brew.sh). Setup installs Lima automatically.
 
 ### Linux (Ubuntu, x86_64 or arm64)
 
+**Requires bare metal** — Firecracker needs direct access to KVM (`/dev/kvm`), which is not available inside most cloud VMs or containers. You need a physical machine or a cloud instance with nested virtualization enabled (e.g. AWS `.metal` instances, GCP with nested virt).
+
 ```bash
 cd linux
 ./setup.sh            # installs Firecracker, extracts kernel, builds rootfs with Bun
@@ -26,7 +28,7 @@ cd linux
 ./run.sh              # boots microVM with interactive serial console
 ```
 
-Requires KVM (`/dev/kvm`). If not accessible, add your user to the `kvm` group:
+If `/dev/kvm` exists but isn't accessible, add your user to the `kvm` group:
 
 ```bash
 sudo usermod -aG kvm $USER
